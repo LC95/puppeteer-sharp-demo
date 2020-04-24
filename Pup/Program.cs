@@ -23,6 +23,8 @@ namespace Pup
             public string WaitUntil { get; set; } = "Load";
 
             [Option("timeout", Required = false, HelpText = "设置超时时间")] public int Timeout { get; set; } = 3000;
+
+            [Option('o', "output", Required = true, HelpText = "输出文件名.pdf")] public string OutPutFile { get; set; }
         }
 
         public static Task PrintError(IEnumerable<Error> errors)
@@ -62,7 +64,7 @@ namespace Pup
                 WaitUntil = new[] { Enum.Parse<WaitUntilNavigation>(option.WaitUntil) }
             });
 
-            await page.PdfAsync($"{Guid.NewGuid()}.pdf", new PdfOptions()
+            await page.PdfAsync(option.OutPutFile, new PdfOptions()
             {
                 Height = 1080,
                 Width = 1920,
