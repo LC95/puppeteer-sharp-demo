@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using CommandLine;
 using PuppeteerSharp;
@@ -34,7 +35,11 @@ namespace Pup
 
         private static async Task DownloadBrowserAsync()
         {
-            var browserFetcher = new BrowserFetcher();
+
+            var browserFetcher = new BrowserFetcher(new BrowserFetcherOptions()
+            {
+                Host = "https://npm.taobao.org/mirrors",
+            });
             browserFetcher.DownloadProgressChanged += new MyHandler().DownloadProgressChangedHandler;
             await browserFetcher.DownloadAsync(BrowserFetcher.DefaultRevision);
         }
@@ -73,6 +78,14 @@ namespace Pup
                     PrintBackground = true,
                     PreferCSSPageSize = true,
                 });
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("网络错误！");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("程序出错");
             }
 
             finally
