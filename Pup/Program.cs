@@ -19,8 +19,8 @@ namespace Pup
             [Option('h', "height", Required = false, HelpText = "设置PDF高度")]
             public int Height { get; set; } = 1080;
 
-            [Option("until", Required = false, HelpText = "设置页面完成事件DOMContentLoaded，Load，Networkidle2，Networkidle0")]
-            public string WaitUntil { get; set; }
+            [Option("until", Required = false, HelpText = "设置页面完成事件DOMContentLoaded，Load(default)，Networkidle2，Networkidle0")]
+            public string WaitUntil { get; set; } = "Load";
 
             [Option("timeout", Required = false, HelpText = "设置超时时间")] public int Timeout { get; set; } = 3000;
         }
