@@ -68,8 +68,8 @@ namespace Pup
 
                 await page.PdfAsync(option.OutPutFile, new PdfOptions()
                 {
-                    Height = 1080,
-                    Width = 1920,
+                    Height = option.Height,
+                    Width = option.Width,
                     PrintBackground = true,
                     PreferCSSPageSize = true,
                 });
