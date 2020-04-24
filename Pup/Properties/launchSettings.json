@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Pup": {
+      "commandName": "Project",
+      "commandLineArgs": "-u \"https://www.baidu.com\""
+    }
+  }
+}
