@@ -15,7 +15,7 @@ namespace Pup
             {
                 var percent = (float) arg.BytesReceived / (float) arg.TotalBytesToReceive;
                 Console.WriteLine(
-                    $"正在下载chrome! Total:{arg.TotalBytesToReceive}B Received:{arg.BytesReceived }B percent:{percent * 100:F}");
+                    $"正在下载chromium! Total:{arg.TotalBytesToReceive}B Received:{arg.BytesReceived }B percent:{percent * 100:F}");
             }
         }
     }

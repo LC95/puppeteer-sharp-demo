@@ -57,20 +57,28 @@ namespace Pup
         {
             await DownloadBrowserAsync();
             var browser = await CreateBrowser(option);
-            await using var page = await browser.NewPageAsync();
-            await page.GoToAsync(option.Url, new NavigationOptions()
+            try
             {
-                Timeout = option.Timeout,
-                WaitUntil = new[] { Enum.Parse<WaitUntilNavigation>(option.WaitUntil) }
-            });
+                await using var page = await browser.NewPageAsync();
+                await page.GoToAsync(option.Url, new NavigationOptions()
+                {
+                    Timeout = option.Timeout,
+                    WaitUntil = new[] { Enum.Parse<WaitUntilNavigation>(option.WaitUntil) }
+                });
 
-            await page.PdfAsync(option.OutPutFile, new PdfOptions()
+                await page.PdfAsync(option.OutPutFile, new PdfOptions()
+                {
+                    Height = 1080,
+                    Width = 1920,
+                    PrintBackground = true,
+                    PreferCSSPageSize = true,
+                });
+            }
+
+            finally
             {
-                Height = 1080,
-                Width = 1920,
-                PrintBackground = true,
-                PreferCSSPageSize = true,
-            });
+                await browser.CloseAsync();
+            }
         }
 
         static async Task Main(string[] args)
